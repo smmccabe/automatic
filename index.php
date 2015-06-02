@@ -22,11 +22,18 @@ else{
   $y = 0;
 }
 
-if(isset($_GET['viewport'])){
-  $viewport = $db->real_escape_string($_GET['viewport']);
+if(isset($_GET['view_x'])){
+  $view_x = $db->real_escape_string($_GET['view_x']);
 }
 else{
-  $viewport = 200;
+  $view_x = 80;
+}
+
+if(isset($_GET['view_y'])){
+  $view_y = $db->real_escape_string($_GET['view_y']);
+}
+else{
+  $view_y = 40;
 }
 ?>
 
@@ -36,17 +43,17 @@ else{
 </head>
 <body>
 <?php
-$result = $db->query("SELECT * FROM grid WHERE x >= $x AND x < $x+$viewport AND y >= $y AND y < $y+$viewport ORDER BY X,Y");
+$result = $db->query("SELECT * FROM grid WHERE x >= $x AND x < $x+$view_x AND y >= $y AND y < $y+$view_y ORDER BY y asc, x asc");
 if ($result->num_rows > 0) {
   while($row = $result->fetch_assoc()) {
-    if (!isset($x)) {
-      $x = $row['x'];
+    if (!isset($y)) {
+      $y = $row['y'];
     }
-    elseif ($x != $row['x']){
-      $x = $row['x'];
+    elseif ($y != $row['y']){
+      $y = $row['y'];
       print '<div class="clear"></div>';
     }
-    print '<div class="' . $row['type'] . '"></div>';
+    print '<div class="grid ' . $row['type'] . '"></div>';
   }
 }
 
