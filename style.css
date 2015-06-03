@@ -10,10 +10,24 @@
     clear: both;
 }
 
+/* Entities */
 .space_elevator {
     background-color: black;
 }
 
+.worker {
+    background: blue;
+}
+
+/* material */
 .grass {
     background-color: lawngreen;
+}
+
+.rock {
+    background-color: grey;
+}
+
+.tree {
+    background-color: green;
 }
